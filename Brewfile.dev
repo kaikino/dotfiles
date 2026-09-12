@@ -1,0 +1,20 @@
+# ── Dev: language-agnostic tooling ────────────────────────────────────
+# Fine on most work machines, but it's tooling, not personalization, so
+# it's a separate opt-in. Toolchains themselves are in Brewfile.personal.
+
+brew "mise"                   # per-project runtimes
+brew "direnv"                 # per-project env vars
+brew "just"                   # task runner
+brew "gh"                     # GitHub
+brew "docker"                 # CLI only; daemon is whatever the machine allows
+brew "lazydocker"
+brew "hurl"                   # HTTP tests as text files
+brew "ast-grep"               # structural search/replace
+brew "sops"                   # encrypted config
+brew "age"                    #   sops' key backend
+brew "mosh"                   # ssh that survives sleep
+brew "cmake"
+brew "pandoc"
+brew "glow"                   # markdown in the terminal
+brew "taplo"                  # TOML lint/format
+brew "glslang"                # validates ~/.config/ghostty/shaders/*.glsl
