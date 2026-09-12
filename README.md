@@ -9,7 +9,7 @@ re-theming means editing that one block.
 
 ```sh
 brew install chezmoi starship eza bat git-delta fzf btop lazydocker \
-             lazygit ripgrep fd atuin mise
+             lazygit ripgrep fd atuin mise gh mosh
 brew install --cask font-hack-nerd-font
 chezmoi init --apply <repo-url>
 ```

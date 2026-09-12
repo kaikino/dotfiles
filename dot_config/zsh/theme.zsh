@@ -94,12 +94,15 @@ TERM_BG_REMOTE='#1A0F12'
 term-bg() { printf '\033]11;%s\007' "$1" }
 alias term-reset='term-bg "$TERM_BG_LOCAL"'   # manual escape hatch
 
-ssh() {
-  [[ -t 1 ]] || { command ssh "$@"; return }
+_remote-tinted() {
+  local cmd=$1; shift
+  [[ -t 1 ]] || { command "$cmd" "$@"; return }
   term-bg "$TERM_BG_REMOTE"
   {
-    command ssh "$@"
+    command "$cmd" "$@"
   } always {
     term-bg "$TERM_BG_LOCAL"
   }
 }
+ssh()  { _remote-tinted ssh  "$@" }
+mosh() { _remote-tinted mosh "$@" }
