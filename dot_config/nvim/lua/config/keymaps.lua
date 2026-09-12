@@ -69,8 +69,6 @@ map("i", ";", ";<C-g>u")
 
 --------------------------------------------------------------- diagnostics --
 map("n", "<leader>xd", vim.diagnostic.open_float, "Line diagnostics")
-map("n", "<leader>xl", "<cmd>lopen<cr>", "Location list")
-map("n", "<leader>xq", "<cmd>copen<cr>", "Quickfix list")
 map("n", "[d", function() vim.diagnostic.jump({ count = -1, float = true }) end, "Previous diagnostic")
 map("n", "]d", function() vim.diagnostic.jump({ count = 1, float = true }) end, "Next diagnostic")
 map("n", "[e", function()

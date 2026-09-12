@@ -8,7 +8,11 @@
 #  Reload after editing: alt-shift-;  then  esc
 # ══════════════════════════════════════════════════════════════════════
 
+config-version = 2
 start-at-login = true
+
+# Workspaces 1-9 exist even when empty (v2 no longer infers this from bindings).
+persistent-workspaces = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
 
 # Blue outline on the focused window, dim navy on the rest. Oxblood is
 # reserved for cmux's active *pane* so the two borders read as two levels
@@ -103,6 +107,32 @@ alt-shift-h = ['join-with left',  'mode main']
 alt-shift-j = ['join-with down',  'mode main']
 alt-shift-k = ['join-with up',    'mode main']
 alt-shift-l = ['join-with right', 'mode main']
+
+# ── Labeled workspaces: these apps always land on the same number ─────
+# 1 terminal · 2 browser · 9 Discord. Everything else opens where you are.
+[[on-window-detected]]
+if.app-id = 'com.cmuxterm.app'
+run = 'move-node-to-workspace 1'
+
+[[on-window-detected]]
+if.app-id = 'com.brave.Browser'
+run = 'move-node-to-workspace 2'
+
+[[on-window-detected]]
+if.app-id = 'com.google.Chrome'
+run = 'move-node-to-workspace 2'
+
+[[on-window-detected]]
+if.app-id = 'org.mozilla.firefox'
+run = 'move-node-to-workspace 2'
+
+[[on-window-detected]]
+if.app-id = 'com.apple.Safari'
+run = 'move-node-to-workspace 2'
+
+[[on-window-detected]]
+if.app-id = 'dev.vencord.vesktop'      # the app named Discord.app is Vesktop
+run = 'move-node-to-workspace 9'
 
 # ── Apps that should float, not tile ──────────────────────────────────
 [[on-window-detected]]

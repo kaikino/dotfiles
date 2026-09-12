@@ -47,6 +47,10 @@ blur show through — `<leader>ut` toggles that off if it ever gets in the way.
 | `]d` `[d` | Next / previous diagnostic |
 | `]e` `[e` | Next / previous error |
 | `<leader>xd` | Show the diagnostic under the cursor |
+| `<leader>xx` / `<leader>xX` | Diagnostics panel: project / this buffer (trouble) |
+| `<leader>xr` | References and definitions, in a panel |
+| `<leader>xq` / `<leader>xl` | Quickfix / location list, in a panel |
+| `]x` `[x` | Next / previous item in the panel |
 | `<C-space>` | Grow selection by syntax node (`<BS>` shrinks) |
 
 Text objects: `af`/`if` function, `ac`/`ic` class, `aa`/`ia` argument,
