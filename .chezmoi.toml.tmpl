@@ -1,0 +1,9 @@
+{{- /* Asked once, on `chezmoi init`. Answers land in ~/.config/chezmoi/chezmoi.toml. */ -}}
+{{- $name  := promptStringOnce . "name"  "Git author name"  "kaikino" -}}
+{{- $email := promptStringOnce . "email" "Git author email" -}}
+{{- $work  := promptBoolOnce   . "work"  "Is this a work machine (y/n)" false -}}
+
+[data]
+    name  = {{ $name | quote }}
+    email = {{ $email | quote }}
+    work  = {{ $work }}

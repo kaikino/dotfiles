@@ -5,6 +5,8 @@
 #  Keyboard changes need a logout to fully take; the rest apply on exit.
 # ══════════════════════════════════════════════════════════════════════
 [[ "$(uname)" == "Darwin" ]] || exit 0
+# Personal-machine opinions; a work laptop keeps whatever IT configured.
+{{ if .work }}exit 0{{ end }}
 set -u
 
 # ── Keyboard ──────────────────────────────────────────────────────────

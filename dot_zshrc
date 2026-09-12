@@ -1,5 +1,7 @@
-export PATH="$HOME/.jenv/bin:$PATH"
-eval "$(jenv init -)"
+if [[ -d "$HOME/.jenv" ]]; then
+  export PATH="$HOME/.jenv/bin:$PATH"
+  eval "$(jenv init -)"
+fi
 export PATH="$HOME/.local/bin:$PATH"
 
 # Prompt, colors, and tool aliases (edit that file, not this one).

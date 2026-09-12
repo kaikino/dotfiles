@@ -1,6 +1,8 @@
+# Identity comes from ~/.config/chezmoi/chezmoi.toml, set on `chezmoi init`,
+# so a work machine commits as the work account.
 [user]
-	email = kinoshita.n.kai@gmail.com
-	name = kaikino
+	name = {{ .name }}
+	email = {{ .email }}
 
 # ══════════════════════════════════════════════════════════════════════
 #  Diffs through delta — syntax highlighting, real line numbers,
