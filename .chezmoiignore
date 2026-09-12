@@ -6,3 +6,6 @@ README.md
 
 # Repo docs, not dotfiles.
 docs
+
+# Package manifest, consumed by brew bundle — not a dotfile.
+Brewfile

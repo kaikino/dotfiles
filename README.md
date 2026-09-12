@@ -8,12 +8,16 @@ re-theming means editing that one block.
 ## New machine
 
 ```sh
-brew install chezmoi starship eza bat git-delta fzf btop lazydocker \
-             lazygit ripgrep fd atuin mise gh mosh
-brew install --cask font-hack-nerd-font raycast nikitabobko/tap/aerospace
-brew install FelixKratz/formulae/borders
-chezmoi init --apply <repo-url>
+brew install chezmoi
+chezmoi init https://github.com/kaikino/dotfiles.git      # clone, don't apply yet
+brew bundle --file="$(chezmoi source-path)/Brewfile"       # every tool, cask, font
+chezmoi apply                                              # configs + macOS defaults
 ```
+
+`Brewfile` is the full package list for this machine (`brew bundle dump`
+regenerates it). On Linux, skip the bundle and install the terminal tools
+from the distro's packages; the shell config degrades cleanly where one
+is missing.
 
 Host-specific aliases (addresses, one-offs) go in `~/.config/zsh/local.zsh`,
 which is sourced if present and deliberately not tracked.
