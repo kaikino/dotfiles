@@ -35,15 +35,17 @@ ADDED=$(num "$ADDED"); REMOVED=$(num "$REMOVED")
 case "$COST" in ''|*[!0-9.]*) COST=0 ;; esac
 
 # ── Palette ──────────────────────────────────────────────────────────
-c() { printf '\033[38;2;%sm' "$1"; }
-DIM=$(c '74;85;112')      # comment grey — structure, never content
-BLUE=$(c '122;162;232')
-PURPLE=$(c '177;145;204')
-GREEN=$(c '155;196;152')
-YELLOW=$(c '227;200;136')
-ORANGE=$(c '196;118;60')
-RED=$(c '224;106;106')
-TEAL=$(c '127;218;206')
+# One source: ~/.config/oxblood/colors.sh. Truecolor escapes survive any theme.
+source "$HOME/.config/oxblood/colors.sh"
+c() { printf '\033[38;2;%sm' "$(ox_rgb "$1")"; }
+DIM=$(c "$OX_DIM")          # comment grey — structure, never content
+BLUE=$(c "$OX_BLUE_HI")
+PURPLE=$(c "$OX_MAGENTA_HI")
+GREEN=$(c "$OX_GREEN_HI")
+YELLOW=$(c "$OX_YELLOW_HI")
+ORANGE=$(c "$OX_ORANGE")
+RED=$(c "$OX_RED_HI")
+TEAL=$(c "$OX_CYAN_HI")
 R=$(printf '\033[0m')
 
 out=""

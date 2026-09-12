@@ -4,6 +4,8 @@
 # Everything else lives in Brewfile.dev / .desktop / .personal.
 
 brew "starship"               # prompt
+brew "zoxide"                 # cd
+brew "fastfetch"              # greeting
 brew "atuin"                  # history
 brew "fzf"                    # Ctrl-T / Alt-C / Tab pickers
 brew "fd"                     #   fzf's file source

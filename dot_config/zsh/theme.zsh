@@ -8,6 +8,15 @@
 # ~/Library/Application Support on macOS, which doesn't travel.
 export XDG_CONFIG_HOME="$HOME/.config"
 
+# The palette, for anything scripted (ssh tint below, statusline, borders).
+source "$HOME/.config/oxblood/colors.sh"
+
+# ── Editor ────────────────────────────────────────────────────────────
+if command -v nvim >/dev/null; then
+  export EDITOR=nvim VISUAL=nvim
+  alias vim=nvim vi=nvim
+fi
+
 # ── Runtimes (mise) ───────────────────────────────────────────────────
 # Swaps node/python per directory from .tool-versions / .nvmrc etc.
 # Java stays with jenv — see ~/.config/mise/config.toml for why.
@@ -56,6 +65,11 @@ fi
 # Loaded after fzf so atuin wins Ctrl-R. Up-arrow is left alone — plain
 # line-by-line recall, no picker popping up uninvited.
 [[ -o interactive && -t 0 ]] && command -v atuin >/dev/null && eval "$(atuin init zsh --disable-up-arrow)"
+
+# ── zoxide: cd that learns. `cd api` jumps to the api dir you use most. ─
+# --cmd cd replaces cd outright; plain paths still work exactly as before.
+export _ZO_DOCTOR=0
+command -v zoxide >/dev/null && eval "$(zoxide init zsh --cmd cd)"
 
 # ── direnv: per-project env vars from .envrc, loaded on cd ────────────
 command -v direnv >/dev/null && eval "$(direnv hook zsh)"
@@ -125,8 +139,8 @@ export LESS='-R -F -X -i'
 #  background washes to oxblood for the duration of the session, so
 #  "am I local or remote?" is answerable without reading the prompt.
 # ══════════════════════════════════════════════════════════════════════
-TERM_BG_LOCAL='#0B1020'
-TERM_BG_REMOTE='#1A0F12'
+TERM_BG_LOCAL="$OX_BG"
+TERM_BG_REMOTE="$OX_BG_REMOTE"
 
 term-bg() { printf '\033]11;%s\007' "$1" }
 alias term-reset='term-bg "$TERM_BG_LOCAL"'   # manual escape hatch
@@ -160,3 +174,6 @@ if [[ -f /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
   ZSH_HIGHLIGHT_STYLES[path]='underline'
   ZSH_HIGHLIGHT_STYLES[comment]='fg=8'
 fi
+
+# ── Greeting: once per top-level interactive shell, not in nested ones ─
+[[ -o interactive && -t 1 && $SHLVL -le 1 ]] && command -v fastfetch >/dev/null && fastfetch
