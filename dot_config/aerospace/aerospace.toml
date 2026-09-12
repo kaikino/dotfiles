@@ -10,10 +10,11 @@
 
 start-at-login = true
 
-# Oxblood outline on the focused window, navy on the rest. In a tiling
-# layout nothing overlaps, so the border is how you know where you are.
+# Blue outline on the focused window, dim navy on the rest. Oxblood is
+# reserved for cmux's active *pane* so the two borders read as two levels
+# (which window / which pane) instead of one misaligned line.
 after-startup-command = [
-  'exec-and-forget borders active_color=0xffb84a4a inactive_color=0xff1e2a45 width=4.0'
+  'exec-and-forget borders active_color=0xff5680c2 inactive_color=0xff1e2a45 width=3.0'
 ]
 
 # Keep the tree flat and sane instead of nesting containers forever.
