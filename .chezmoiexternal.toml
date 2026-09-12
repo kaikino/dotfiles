@@ -1,0 +1,9 @@
+# Third-party zsh plugins that don't ship via Homebrew. chezmoi fetches
+# these on `chezmoi apply` and refreshes them weekly; they're never
+# committed here.
+[".config/zsh/plugins/fzf-tab"]
+    type = "archive"
+    url = "https://github.com/Aloxaf/fzf-tab/archive/refs/heads/master.tar.gz"
+    exact = true
+    stripComponents = 1
+    refreshPeriod = "168h"

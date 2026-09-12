@@ -13,6 +13,26 @@ export XDG_CONFIG_HOME="$HOME/.config"
 # Java stays with jenv — see ~/.config/mise/config.toml for why.
 command -v mise >/dev/null && eval "$(mise activate zsh)"
 
+# ── Completion ────────────────────────────────────────────────────────
+# Homebrew's completions aren't on the system zsh's fpath by default.
+# compinit is cached to ~/.cache/zsh so it doesn't rescan every launch.
+fpath=(/opt/homebrew/share/zsh/site-functions $fpath)
+mkdir -p "$HOME/.cache/zsh"
+autoload -Uz compinit && compinit -d "$HOME/.cache/zsh/zcompdump"
+zstyle ':completion:*' menu no
+zstyle ':completion:*:descriptions' format '[%d]'
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'   # case-insensitive
+
+# fzf-tab: every Tab completion becomes an fzf picker. Has to load after
+# compinit and before anything that wraps widgets (autosuggestions).
+if [[ -f "$HOME/.config/zsh/plugins/fzf-tab/fzf-tab.plugin.zsh" ]]; then
+  source "$HOME/.config/zsh/plugins/fzf-tab/fzf-tab.plugin.zsh"
+  zstyle ':fzf-tab:*' use-fzf-default-opts yes
+  zstyle ':fzf-tab:*' switch-group '<' '>'
+  zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always --group-directories-first $realpath'
+  zstyle ':fzf-tab:complete:(-command-|-parameter-|-brace-parameter-|export|unset|expand):*' fzf-preview 'echo ${(P)word}'
+fi
+
 # ── Prompt ────────────────────────────────────────────────────────────
 command -v starship >/dev/null && eval "$(starship init zsh)"
 
@@ -36,6 +56,10 @@ fi
 # Loaded after fzf so atuin wins Ctrl-R. Up-arrow is left alone — plain
 # line-by-line recall, no picker popping up uninvited.
 [[ -o interactive && -t 0 ]] && command -v atuin >/dev/null && eval "$(atuin init zsh --disable-up-arrow)"
+
+# ── direnv: per-project env vars from .envrc, loaded on cd ────────────
+command -v direnv >/dev/null && eval "$(direnv hook zsh)"
+export DIRENV_LOG_FORMAT=""   # it's noisy by default; the prompt shows the effect
 
 # ── ripgrep ───────────────────────────────────────────────────────────
 export RIPGREP_CONFIG_PATH="$HOME/.config/ripgrep/config"
@@ -119,3 +143,20 @@ _remote-tinted() {
 }
 ssh()  { _remote-tinted ssh  "$@" }
 mosh() { _remote-tinted mosh "$@" }
+
+# ══════════════════════════════════════════════════════════════════════
+#  Line editor plugins. Order matters: autosuggestions wraps widgets,
+#  syntax-highlighting must be the last thing sourced in the shell.
+# ══════════════════════════════════════════════════════════════════════
+if [[ -f /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]]; then
+  source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+  ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'          # ghost text in slot-8 grey
+  ZSH_AUTOSUGGEST_STRATEGY=(history completion)
+  bindkey '^ ' autosuggest-accept                 # Ctrl-Space takes the whole suggestion
+fi
+if [[ -f /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]]; then
+  source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+  ZSH_HIGHLIGHT_STYLES[unknown-token]='fg=red,bold'
+  ZSH_HIGHLIGHT_STYLES[path]='underline'
+  ZSH_HIGHLIGHT_STYLES[comment]='fg=8'
+fi

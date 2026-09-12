@@ -6,6 +6,8 @@ tap "nikitabobko/tap"
 brew "age"
 # Java build tool
 brew "ant"
+# Code searching, linting, rewriting
+brew "ast-grep"
 # Improved shell history for zsh, bash, fish and nushell
 brew "atuin"
 # Clone of cat(1) with syntax highlighting and Git integration
@@ -16,6 +18,8 @@ brew "btop"
 brew "chezmoi"
 # Cross-platform make
 brew "cmake"
+# Load/unload environment variables based on $PWD
+brew "direnv"
 # Pack, ship and run any application as a lightweight container
 brew "docker"
 # Modern, maintained replacement for ls
@@ -34,18 +38,28 @@ brew "gh"
 brew "gifsicle"
 # Syntax-highlighting pager for git and diff output
 brew "git-delta"
+# Render markdown on the CLI
+brew "glow"
+# OpenGL and OpenGL ES reference compiler for shading languages
+brew "glslang"
 # Open source programming language to build simple/reliable/efficient software
 brew "go"
 # Fast linters runner for Go
 brew "golangci-lint"
 # Go Language's command-line interface for database migrations
 brew "goose"
+# Human friendly `go test` runner
+brew "gotestsum"
+# Run and Test HTTP Requests with plain text and curl
+brew "hurl"
 # Verilog simulation and synthesis tool
 brew "icarus-verilog"
 # Tools and libraries to manipulate images in select formats
 brew "imagemagick"
 # Manage your Java environment
 brew "jenv"
+# Handy way to save and run project-specific commands
+brew "just"
 # Lazier way to manage everything docker
 brew "lazydocker"
 # Simple terminal UI for git commands
@@ -62,14 +76,24 @@ brew "node"
 brew "openjdk@17"
 # Swiss-army knife of markup format conversion
 brew "pandoc"
+# PDF rendering library (based on the xpdf-3.0 code base)
+brew "poppler"
+# SVG rendering tool and library
+brew "resvg"
 # Search tool like grep and The Silver Searcher
 brew "ripgrep"
 # Library for using TrueType fonts in SDL applications
 brew "sdl2_ttf"
+# 7-Zip is a file archiver with a high compression ratio
+brew "sevenzip"
+# Editor of encrypted files
+brew "sops"
 # Generate type safe Go from SQL
 brew "sqlc"
 # Cross-shell prompt for astronauts
 brew "starship"
+# Waveform viewer, supporting VCD, FST, or GHW format
+brew "surfer"
 # TOML toolkit written in Rust
 brew "taplo"
 # User interface to the TELNET protocol
@@ -78,6 +102,12 @@ brew "telnet"
 brew "verilator"
 # Sends magic packets to wake up network-devices
 brew "wakeonlan"
+# Blazing fast terminal file manager written in Rust, based on async I/O
+brew "yazi"
+# Fish-like fast/unobtrusive autosuggestions for zsh
+brew "zsh-autosuggestions"
+# Fish shell like syntax highlighting for zsh
+brew "zsh-syntax-highlighting"
 # A window border system for macOS
 brew "felixkratz/formulae/borders", trusted: true
 # AeroSpace is an i3-like tiling window manager for macOS
@@ -94,6 +124,8 @@ cask "font-hack-nerd-font"
 cask "kpen"
 # Orchestrates virtual Ubuntu instances
 cask "multipass"
+# Replacement for Docker Desktop
+cask "orbstack"
 # Image editor
 cask "paintbrush"
 # Control your tools with a few keystrokes
