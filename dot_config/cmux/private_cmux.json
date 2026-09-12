@@ -22,7 +22,7 @@
   },
 
   "paneBorderColor": "#1E2A45",
-  "activePaneBorderColor": "#B84A4A",
+  "activePaneBorderColor": null,
 
   "workspaceColors": {
     "indicatorStyle": "washRail",
