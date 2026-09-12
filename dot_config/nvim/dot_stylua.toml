@@ -1,0 +1,4 @@
+# Applies when editing this config. Other projects keep their own settings.
+indent_type = "Spaces"
+indent_width = 2
+column_width = 100
