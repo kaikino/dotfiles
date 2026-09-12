@@ -71,6 +71,19 @@ command -v btop >/dev/null && alias top='btop'
 command -v lazydocker >/dev/null && alias lzd='lazydocker'
 command -v lazygit >/dev/null && alias lg='lazygit'
 
+# yazi, but `q` drops the shell into whatever directory you ended in.
+if command -v yazi >/dev/null; then
+  y() {
+    local tmp cwd
+    tmp="$(mktemp -t yazi-cwd.XXXXXX)"
+    yazi "$@" --cwd-file="$tmp"
+    if cwd="$(command cat -- "$tmp")" && [[ -n "$cwd" && "$cwd" != "$PWD" ]]; then
+      builtin cd -- "$cwd"
+    fi
+    rm -f -- "$tmp"
+  }
+fi
+
 # ── Docker shorthands ─────────────────────────────────────────────────
 # Column layout for `docker ps` lives in ~/.docker/config.json.
 alias dps='docker ps'

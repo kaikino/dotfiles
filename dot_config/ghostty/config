@@ -69,6 +69,13 @@ window-padding-color = extend
 background-opacity = 0.90
 background-blur = 20
 
+# ── CRT shader ────────────────────────────────────────────────────────
+# Scanlines + bloom + vignette, deliberately subtle. Constants at the
+# top of the file are the knobs. Comment out the first line to disable.
+custom-shader = ~/.config/ghostty/shaders/crt.glsl
+# Nothing in the shader is time-based, so don't burn GPU re-rendering.
+custom-shader-animation = false
+
 # ── Behavior ──────────────────────────────────────────────────────────
 # ~100MB, so long agent sessions stay scrollable.
 scrollback-limit = 100000000

@@ -1,0 +1,111 @@
+# Oxblood Navy for yazi. ANSI names throughout, so it follows the Ghostty
+# palette. Selection is reverse video, separators are plain brackets —
+# no powerline wedges anywhere.
+[mgr]
+cwd = { fg = "cyan" }
+hovered         = { reversed = true }
+preview_hovered = { underline = true }
+find_keyword  = { fg = "yellow", bold = true, underline = true }
+find_position = { fg = "magenta", bg = "reset", bold = true }
+marker_copied   = { fg = "green",  bg = "green" }
+marker_cut      = { fg = "red",    bg = "red" }
+marker_marked   = { fg = "cyan",   bg = "cyan" }
+marker_selected = { fg = "yellow", bg = "yellow" }
+count_copied   = { fg = "black", bg = "green" }
+count_cut      = { fg = "black", bg = "red" }
+count_selected = { fg = "black", bg = "yellow" }
+border_symbol = "│"
+border_style  = { fg = "darkgray" }
+
+[mode]
+normal_main = { fg = "black", bg = "blue",   bold = true }
+normal_alt  = { fg = "blue",  bg = "black" }
+select_main = { fg = "black", bg = "red",    bold = true }
+select_alt  = { fg = "red",   bg = "black" }
+unset_main  = { fg = "black", bg = "yellow", bold = true }
+unset_alt   = { fg = "yellow", bg = "black" }
+
+[status]
+overall   = {}
+sep_left  = { open = "", close = "" }
+sep_right = { open = "", close = "" }
+perm_type  = { fg = "green" }
+perm_read  = { fg = "yellow" }
+perm_write = { fg = "red" }
+perm_exec  = { fg = "cyan" }
+perm_sep   = { fg = "darkgray" }
+progress_label  = { fg = "white", bold = true }
+progress_normal = { fg = "blue", bg = "black" }
+progress_error  = { fg = "red",  bg = "black" }
+
+[tabs]
+active   = { fg = "black", bg = "blue", bold = true }
+inactive = { fg = "blue",  bg = "black" }
+sep_inner = { open = "[", close = "]" }
+sep_outer = { open = "",  close = "" }
+
+[which]
+mask = { bg = "black" }
+cand = { fg = "cyan" }
+rest = { fg = "darkgray" }
+desc = { fg = "magenta" }
+separator = " › "
+separator_style = { fg = "darkgray" }
+
+[input]
+border   = { fg = "blue" }
+title    = {}
+value    = {}
+selected = { reversed = true }
+
+[cmp]
+border   = { fg = "blue" }
+active   = { reversed = true }
+inactive = {}
+
+[pick]
+border   = { fg = "blue" }
+active   = { fg = "magenta", bold = true }
+inactive = {}
+
+[confirm]
+border  = { fg = "red" }
+title   = { fg = "red", bold = true }
+content = {}
+list    = {}
+btn_yes = { reversed = true }
+btn_no  = {}
+
+[spot]
+border   = { fg = "blue" }
+title    = { fg = "blue" }
+tbl_col  = { fg = "blue" }
+tbl_cell = { fg = "yellow", reversed = true }
+
+[notify]
+title_info  = { fg = "green" }
+title_warn  = { fg = "yellow" }
+title_error = { fg = "red" }
+
+[tasks]
+border  = { fg = "blue" }
+title   = {}
+hovered = { fg = "magenta", underline = true }
+
+[help]
+on      = { fg = "cyan" }
+run     = { fg = "magenta" }
+desc    = {}
+hovered = { reversed = true, bold = true }
+footer  = { fg = "black", bg = "white" }
+
+[filetype]
+rules = [
+  { mime = "image/*",          fg = "yellow" },
+  { mime = "{audio,video}/*",  fg = "magenta" },
+  { mime = "application/{zip,rar,7z*,tar,gzip,bzip*,xz,zstd}", fg = "red" },
+  { mime = "application/{pdf,doc,rtf}", fg = "cyan" },
+  { url = "*", is = "orphan", fg = "red" },
+  { url = "*", is = "exec",   fg = "green" },
+  { url = "*/", fg = "blue", bold = true },
+]
