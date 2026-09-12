@@ -1,0 +1,315 @@
+<title>Oxblood Navy</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+<style>
+  :root {
+    --bg: #0B1020; --panel: #0F1628; --rule: #1E2A45; --dim: #4A5570;
+    --text: #C6CCDA; --bright: #E6EAF2;
+    --red: #B84A4A; --red-hi: #E06A6A; --blue: #5680C2; --blue-hi: #7AA2E8;
+    --gold: #C7A96B; --green: #7FA97E; --cyan: #5C9FA8; --purple: #8F6FA8;
+    --mono: "IBM Plex Mono", "Hack Nerd Font Mono", Menlo, Consolas, monospace;
+  }
+  html { color-scheme: dark; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font: 400 14px/1.6 var(--mono); padding: 0 20px;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 78ch; margin: 0 auto; padding-block: 40px 80px; }
+
+  /* ── masthead ─────────────────────────────────────────── */
+  .mast { border: 1px solid var(--rule); padding: 22px 24px; margin-bottom: 40px; }
+  .mast .eyebrow { color: var(--dim); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; margin: 0 0 8px; }
+  .mast h1 { margin: 0 0 6px; font-size: 26px; font-weight: 600; color: var(--bright); letter-spacing: -.01em; text-wrap: balance; }
+  .mast h1 .ox { color: var(--red-hi); }
+  .mast p { margin: 0; max-width: 62ch; }
+  .rail { display: flex; flex-wrap: wrap; gap: 4px 18px; margin-top: 16px; font-size: 12px; }
+  .rail a { color: var(--blue-hi); text-decoration: none; }
+  .rail a::before { content: "▸ "; color: var(--dim); }
+  .rail a:hover, .rail a:focus-visible { color: var(--bright); outline: none; text-decoration: underline; }
+
+  /* ── TUI panels ───────────────────────────────────────── */
+  .panel { position: relative; border: 1px solid var(--rule); padding: 22px 20px 18px; margin: 0 0 34px; }
+  .panel > h2 {
+    position: absolute; top: -.8em; left: 12px; margin: 0; padding: 0 8px;
+    background: var(--bg); font-size: 13px; font-weight: 600; letter-spacing: .06em;
+    text-transform: uppercase; color: var(--bright);
+  }
+  .panel > h2::before { content: "─ "; color: var(--red); }
+  .panel > h2::after  { content: " ─"; color: var(--red); }
+  .panel p { margin: 0 0 12px; max-width: 66ch; }
+  .panel p:last-child { margin-bottom: 0; }
+  .panel h3 { margin: 18px 0 8px; font-size: 13px; font-weight: 600; color: var(--gold); }
+  .panel h3:first-child { margin-top: 0; }
+  code, kbd, pre { font-family: var(--mono); }
+  code { color: var(--blue-hi); font-size: 13px; }
+  kbd {
+    display: inline-block; font-size: 12px; line-height: 1.3; padding: 1px 6px;
+    border: 1px solid var(--dim); color: var(--bright); background: var(--panel); white-space: nowrap;
+  }
+  pre {
+    margin: 10px 0 14px; padding: 12px 14px; background: var(--panel); border-left: 2px solid var(--rule);
+    font-size: 13px; line-height: 1.55; overflow-x: auto; color: var(--text);
+  }
+  pre .c { color: var(--dim); } pre .r { color: var(--red-hi); } pre .b { color: var(--blue-hi); }
+  pre .y { color: var(--gold); } pre .g { color: var(--green); } pre .cy { color: var(--cyan); }
+  pre .w { color: var(--bright); }
+  .path { color: var(--cyan); }
+  .note { border-left: 2px solid var(--red); padding: 4px 12px; margin: 12px 0; color: var(--text); }
+  .note strong { color: var(--red-hi); font-weight: 500; }
+
+  /* ── tables ───────────────────────────────────────────── */
+  .tbl { overflow-x: auto; margin: 6px 0 14px; }
+  table { border-collapse: collapse; width: 100%; font-size: 13px; font-variant-numeric: tabular-nums; }
+  th { text-align: left; font-weight: 500; color: var(--dim); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; padding: 0 10px 6px 0; border-bottom: 1px solid var(--rule); }
+  td { padding: 5px 10px 5px 0; border-bottom: 1px solid var(--rule); vertical-align: top; }
+  tr:last-child td { border-bottom: 0; }
+  td:first-child { white-space: nowrap; color: var(--bright); }
+
+  /* ── palette ──────────────────────────────────────────── */
+  .swatches { display: grid; grid-template-columns: repeat(8, 1fr); gap: 6px; margin: 8px 0 14px; }
+  .sw { aspect-ratio: 1 / 1; max-width: 100%; border: 1px solid var(--rule); display: flex; align-items: flex-end; padding: 4px; font-size: 10px; color: rgba(0,0,0,.65); line-height: 1.2; }
+  .sw.dk { color: rgba(230,234,242,.7); }
+  @media (max-width: 560px) { .swatches { grid-template-columns: repeat(4, 1fr); } }
+
+  /* ── prompt anatomy ───────────────────────────────────── */
+  .anat { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: max-content 1fr; gap: 4px 16px; font-size: 13px; }
+  .anat dt { color: var(--bright); }
+  .anat dd { margin: 0; }
+  @media (max-width: 480px) { .anat { grid-template-columns: 1fr; } .anat dd { margin-bottom: 6px; color: var(--dim); } }
+
+  /* ── file map ─────────────────────────────────────────── */
+  .tree { margin: 0; padding: 0; list-style: none; font-size: 13px; }
+  .tree li { display: grid; grid-template-columns: minmax(0, 30ch) 1fr; gap: 12px; padding: 3px 0; }
+  .tree li span:first-child { color: var(--cyan); word-break: break-all; }
+  @media (max-width: 560px) { .tree li { grid-template-columns: 1fr; } }
+
+  /* ── todo ─────────────────────────────────────────────── */
+  .todo { list-style: none; padding: 0; margin: 0; }
+  .todo li { padding: 5px 0 5px 26px; position: relative; }
+  .todo li::before { content: "[ ]"; position: absolute; left: 0; color: var(--red-hi); }
+  .todo li.done::before { content: "[x]"; color: var(--green); }
+  .todo li.done { color: var(--dim); }
+
+  .foot { color: var(--dim); font-size: 12px; text-align: left; margin-top: 10px; }
+  a { color: var(--blue-hi); }
+  @media (prefers-reduced-motion: no-preference) { .rail a { transition: color .12s; } }
+</style>
+
+<div class="wrap">
+
+<header class="mast">
+  <p class="eyebrow">Terminal · desktop · dotfiles &nbsp;—&nbsp; kaikino, 2026-09-13</p>
+  <h1><span class="ox">Oxblood Navy</span>, walked through</h1>
+  <p>One palette, defined once, that every tool on the machine reads. This page is the map: what runs when a shell opens, what each key does, and where each file lives when you want to change it.</p>
+  <nav class="rail">
+    <a href="#palette">palette</a><a href="#startup">shell startup</a><a href="#prompt">prompt</a>
+    <a href="#daily">daily commands</a><a href="#git">git</a><a href="#docker">docker</a>
+    <a href="#runtimes">runtimes</a><a href="#remote">remote</a><a href="#desktop">desktop</a>
+    <a href="#dotfiles">dotfiles</a><a href="#files">file map</a><a href="#todo">still to do</a>
+  </nav>
+</header>
+
+<section class="panel" id="palette">
+  <h2>The palette</h2>
+  <p>Terminals colour output through 16 numbered ANSI slots. Ghostty defines what those slots mean; everything else — the prompt, diffs, <code>ls</code>, fzf, lazygit — names a slot (<code>red</code>, <code>bright-black</code>) rather than a hex value. Change the block in <span class="path">~/.config/ghostty/config</span> and the whole machine follows.</p>
+  <div class="swatches">
+    <div class="sw dk" style="background:#131A2B">0</div><div class="sw" style="background:#B84A4A">1 red</div>
+    <div class="sw" style="background:#7FA97E">2 grn</div><div class="sw" style="background:#C7A96B">3 yel</div>
+    <div class="sw" style="background:#5680C2">4 blu</div><div class="sw" style="background:#8F6FA8">5 mag</div>
+    <div class="sw" style="background:#5C9FA8">6 cyn</div><div class="sw" style="background:#C6CCDA">7 wht</div>
+    <div class="sw dk" style="background:#4A5570">8 dim</div><div class="sw" style="background:#E06A6A">9</div>
+    <div class="sw" style="background:#9BC498">10</div><div class="sw" style="background:#E3C888">11</div>
+    <div class="sw" style="background:#7AA2E8">12</div><div class="sw" style="background:#B191CC">13</div>
+    <div class="sw" style="background:#7FC4CE">14</div><div class="sw" style="background:#E6EAF2">15</div>
+  </div>
+  <p>Ground is <code>#0B1020</code>, cursor and every "this is the one" signal are oxblood <code>#B84A4A</code>, structure and metadata are slot 8 grey. Window is 90% opaque with blur; font is Hack Nerd Font Mono at 13px with 12% extra leading.</p>
+  <p>Four places hold hex directly because they can't read ANSI names: cmux's pane and sidebar colours, the Claude Code statusline, delta's diff-row backgrounds, and the AeroSpace window border. If you re-theme, those need touching too.</p>
+</section>
+
+<section class="panel" id="startup">
+  <h2>What runs when a shell opens</h2>
+  <p><span class="path">~/.zshrc</span> is deliberately three lines of real config. It sets PATH for jenv, then sources two files in order:</p>
+<pre><span class="path">~/.config/zsh/theme.zsh</span>   <span class="c"># tracked — prompt, colours, aliases, tool init</span>
+<span class="path">~/.config/zsh/local.zsh</span>   <span class="c"># untracked — this machine only (wake-pc, power-pc)</span></pre>
+  <p>Inside <code>theme.zsh</code>, order matters and is commented:</p>
+  <div class="tbl"><table>
+    <tr><th>Step</th><th>Why it's there</th></tr>
+    <tr><td>XDG_CONFIG_HOME</td><td>One config root at <code>~/.config</code>. lazygit and lazydocker would otherwise write to <code>~/Library/Application Support</code>, which doesn't travel.</td></tr>
+    <tr><td>mise activate</td><td>Hooks <code>cd</code> so node/python switch per directory.</td></tr>
+    <tr><td>starship init</td><td>The prompt.</td></tr>
+    <tr><td>fzf</td><td>Binds <kbd>Ctrl-T</kbd> and <kbd>Alt-C</kbd>, fed by <code>fd</code>.</td></tr>
+    <tr><td>atuin init</td><td>Loaded <em>after</em> fzf so it wins <kbd>Ctrl-R</kbd>. Up-arrow left alone.</td></tr>
+    <tr><td>aliases</td><td>Each guarded by <code>command -v</code>, so a machine without the tool degrades to the plain command.</td></tr>
+  </table></div>
+  <p>Nothing in that file changes what a command <em>does</em> — with one exception: <code>cat</code> is a function that routes flag-led calls (<code>cat -v</code>) to the real cat and bare files to bat.</p>
+</section>
+
+<section class="panel" id="prompt">
+  <h2>The prompt</h2>
+<pre><span class="r">┌─</span><span class="b">~/dev/api</span> <span class="y">on main</span> <span class="r">*2 ^1</span> <span class="cy">docker:desktop-linux</span> <span class="g">node v26.8.2</span> <span class="c">took 4s</span>                <span class="c">04:12</span>
+<span class="r">└─</span><span class="b">&gt;</span> </pre>
+  <dl class="anat">
+    <dt>~/dev/api</dt><dd>Directory, trimmed to the repo root or last three segments. <code>…/</code> prefix when trimmed.</dd>
+    <dt>on main</dt><dd>Git branch, gold.</dd>
+    <dt>*2 ^1</dt><dd>Dirty state, in red so it catches the eye: <code>*</code> modified, <code>+</code> staged, <code>?</code> untracked, <code>^</code> ahead, <code>v</code> behind, <code>!</code> conflict, <code>=</code> stash.</dd>
+    <dt>docker: / k8s:</dt><dd>Context — only in directories with Docker/k8s files, and only when off the default context.</dd>
+    <dt>node / java / py</dt><dd>Runtime version — only where a real project marker exists (<code>package.json</code>, <code>pom.xml</code>…). A stray <code>.js</code> file no longer triggers it.</dd>
+    <dt>took 4s</dt><dd>Duration of the last command, when over 2s.</dd>
+    <dt>04:12</dt><dd>Clock, right-aligned.</dd>
+    <dt>&gt;</dt><dd>Blue when the last command succeeded, red when it didn't.</dd>
+  </dl>
+  <p style="margin-top:12px">Config: <span class="path">~/.config/starship.toml</span>. Keybindings and colours are ANSI names.</p>
+</section>
+
+<section class="panel" id="daily">
+  <h2>Daily commands</h2>
+  <div class="tbl"><table>
+    <tr><th>Type</th><th>Runs</th><th>Notes</th></tr>
+    <tr><td>ls · ll · la · lt</td><td>eza</td><td>Directories first. <code>ll</code> adds size, date, git status per file. <code>lt</code> is a two-level tree.</td></tr>
+    <tr><td>cat <em>file</em></td><td>bat, plain</td><td>Syntax highlighting, no gutter. <code>catn</code> adds line numbers and git changes. Flags go to real cat.</td></tr>
+    <tr><td>man <em>x</em></td><td>bat as pager</td><td>Coloured man pages.</td></tr>
+    <tr><td>rg <em>pattern</em></td><td>ripgrep</td><td>Smart-case, sees dotfiles, ignores <code>.git</code> and gitignored files. Matches in red.</td></tr>
+    <tr><td>fd <em>name</em></td><td>fd</td><td>Same respect for .gitignore. <code>fd -e py</code> by extension, <code>fd -t d</code> dirs only.</td></tr>
+    <tr><td>top</td><td>btop</td><td>Block graphs, square corners, transparent ground. <kbd>q</kbd> quits.</td></tr>
+    <tr><td>lg</td><td>lazygit</td><td>See git panel.</td></tr>
+    <tr><td>lzd</td><td>lazydocker</td><td>See docker panel.</td></tr>
+    <tr><td>term-reset</td><td>—</td><td>Restores the window background if an ssh tint ever sticks.</td></tr>
+  </table></div>
+  <h3>Keys at the prompt</h3>
+  <div class="tbl"><table>
+    <tr><th>Key</th><th>Does</th></tr>
+    <tr><td><kbd>Ctrl-R</kbd></td><td>atuin history search. Fuzzy; <kbd>Enter</kbd> runs, <kbd>Tab</kbd> pastes to edit. <kbd>Ctrl-R</kbd> again cycles the filter: global → host → session → directory.</td></tr>
+    <tr><td><kbd>Ctrl-T</kbd></td><td>fzf file picker into the current command line.</td></tr>
+    <tr><td><kbd>Alt-C</kbd></td><td>fzf directory picker, then cd there.</td></tr>
+    <tr><td><kbd>↑</kbd></td><td>Plain previous command. Not hijacked.</td></tr>
+  </table></div>
+</section>
+
+<section class="panel" id="git">
+  <h2>Git</h2>
+  <p><code>git diff</code>, <code>log -p</code>, <code>show</code> all pipe through <strong>delta</strong>: line numbers, syntax colour from the palette, removed rows on a dark-red wash and added rows on dark-green. <kbd>n</kbd>/<kbd>N</kbd> jump between files in the pager. <code>merge.conflictstyle</code> is <code>zdiff3</code>, so conflicts show the common base too.</p>
+  <h3>lazygit (<code>lg</code>)</h3>
+  <p>Panels left, diff right; oxblood border marks the focused panel. The half-dozen keys that carry most of it:</p>
+  <div class="tbl"><table>
+    <tr><th>Key</th><th>Does</th></tr>
+    <tr><td><kbd>Tab</kbd> / <kbd>1</kbd>–<kbd>5</kbd></td><td>Move between panels (status, files, branches, commits, stash).</td></tr>
+    <tr><td><kbd>Space</kbd></td><td>Stage or unstage the file. <kbd>Enter</kbd> opens it to stage individual hunks or lines.</td></tr>
+    <tr><td><kbd>c</kbd></td><td>Commit. <kbd>A</kbd> amends the last one.</td></tr>
+    <tr><td><kbd>p</kbd> / <kbd>P</kbd></td><td>Pull / push.</td></tr>
+    <tr><td><kbd>Space</kbd> on a branch</td><td>Check it out. <kbd>n</kbd> new branch, <kbd>r</kbd> rebase onto it.</td></tr>
+    <tr><td><kbd>i</kbd> / <kbd>e</kbd> / <kbd>s</kbd> on a commit</td><td>Interactive rebase: edit, squash, drop — from a list, not a text file.</td></tr>
+    <tr><td><kbd>?</kbd></td><td>Every key for the current panel.</td></tr>
+  </table></div>
+  <p>Identity note: <span class="path">~/.gitconfig</span> is tracked in dotfiles, name and email included.</p>
+</section>
+
+<section class="panel" id="docker">
+  <h2>Docker</h2>
+  <p><code>docker ps</code> and <code>docker images</code> print trimmed columns — name, status, ports, image — set in <span class="path">~/.docker/config.json</span>. That file is <em>not</em> in dotfiles: its <code>auths</code> block is where registry tokens land.</p>
+  <div class="tbl"><table>
+    <tr><th>Alias</th><th>Runs</th></tr>
+    <tr><td>dps · dpsa</td><td>docker ps · docker ps -a</td></tr>
+    <tr><td>dimg</td><td>docker images</td></tr>
+    <tr><td>dlog <em>name</em></td><td>docker logs -f --tail=200</td></tr>
+  </table></div>
+  <h3>lazydocker (<code>lzd</code>)</h3>
+  <p>Containers, images, volumes, and compose services in one screen. <kbd>Enter</kbd> on a container shows logs; <kbd>[</kbd> <kbd>]</kbd> switch to stats, config, top; <kbd>d</kbd> removes, <kbd>s</kbd> stops, <kbd>r</kbd> restarts. <kbd>x</kbd> for the full menu on anything. Docker Desktop has to be running for it to see anything.</p>
+</section>
+
+<section class="panel" id="runtimes">
+  <h2>Runtimes: mise and jenv</h2>
+  <p>Two managers, on purpose. <strong>jenv</strong> still owns Java — you have JDK 17 and 25 registered, and <code>~/.java-version</code> sets the global default. <strong>mise</strong> handles everything else per directory, and is told to ignore <code>.java-version</code> so the two never fight.</p>
+  <p>mise pins nothing globally: Homebrew's node (26.x) is the fallback, and mise only takes over when a directory says otherwise. To pin a project:</p>
+<pre><span class="c"># in the project</span>
+mise use node@22        <span class="c"># writes mise.toml, installs 22 if missing</span>
+node --version          <span class="c"># v22.x here, v26.x outside</span></pre>
+  <p>It also honours <code>.nvmrc</code> and <code>.node-version</code> if a repo already has one. <code>mise ls</code> shows what's installed; <code>mise doctor</code> if anything looks off.</p>
+  <div class="note"><strong>Heads-up.</strong> Node was force-bumped from a broken 25.8 to 26.8 today. If a project needs 22 or 24, pin it with mise as above rather than fighting Homebrew.</div>
+</section>
+
+<section class="panel" id="remote">
+  <h2>Remote sessions</h2>
+  <p>The remote box's own dotfiles decide what its prompt looks like — nothing here changes that until the dotfiles repo is applied there. What <em>is</em> local: while <code>ssh</code> or <code>mosh</code> is running, the window background washes from navy to dark oxblood, and restores on exit. Local versus remote is answerable without reading anything.</p>
+  <p><code>mosh</code> is installed on this side. It needs <code>mosh-server</code> on the far side (<code>apt install mosh</code> on the PC) before it works; then <code>mosh kai@…</code> gives you a session that survives sleep and network changes.</p>
+  <p>The <code>wake-pc</code> and <code>power-pc</code> aliases moved to <span class="path">~/.config/zsh/local.zsh</span> — sourced, but outside the repo, because they carry Tailscale addresses and a MAC.</p>
+</section>
+
+<section class="panel" id="desktop">
+  <h2>Desktop: Raycast and AeroSpace</h2>
+  <h3>Raycast</h3>
+  <p>Spotlight replacement on <kbd>⌘Space</kbd> (set during onboarding; Spotlight's own shortcut has to be unchecked in System Settings if Raycast doesn't do it for you). Clipboard history is the feature to enable first. No config file — it lives in the app.</p>
+  <h3>AeroSpace</h3>
+  <p>Tiling window manager: windows never overlap, each new one splits the space. Not launched yet — first run asks for Accessibility permission and re-tiles everything open. Everything is on <kbd>⌥</kbd> (Option):</p>
+  <div class="tbl"><table>
+    <tr><th>Keys</th><th>Does</th></tr>
+    <tr><td><kbd>⌥</kbd> h j k l</td><td>Focus left / down / up / right.</td></tr>
+    <tr><td><kbd>⌥⇧</kbd> h j k l</td><td>Move the window that way.</td></tr>
+    <tr><td><kbd>⌥</kbd> 1–9</td><td>Go to workspace.</td></tr>
+    <tr><td><kbd>⌥⇧</kbd> 1–9</td><td>Send window to workspace and follow it.</td></tr>
+    <tr><td><kbd>⌥</kbd> Tab</td><td>Previous workspace.</td></tr>
+    <tr><td><kbd>⌥</kbd> – / =</td><td>Shrink / grow.</td></tr>
+    <tr><td><kbd>⌥</kbd> f</td><td>Fullscreen toggle.</td></tr>
+    <tr><td><kbd>⌥</kbd> / &nbsp;·&nbsp; <kbd>⌥</kbd> ,</td><td>Tiles layout · accordion layout.</td></tr>
+    <tr><td><kbd>⌥⇧</kbd> ;</td><td>Service mode. Then <kbd>Esc</kbd> reloads config, <kbd>r</kbd> resets the layout, <kbd>f</kbd> toggles floating for the window.</td></tr>
+  </table></div>
+  <p>Focused window gets a 4px oxblood border, others navy — that's JankyBorders, started by AeroSpace. System Settings, Finder, and Activity Monitor float instead of tiling; add more at the bottom of <span class="path">~/.config/aerospace/aerospace.toml</span>.</p>
+</section>
+
+<section class="panel" id="dotfiles">
+  <h2>Dotfiles with chezmoi</h2>
+  <p>Every config on this page is tracked in a git repo at <span class="path">~/.local/share/chezmoi</span>, pushed to <code>github.com/kaikino/dotfiles</code>. chezmoi keeps two copies of each file: the live one you use, and the repo one git knows about. The workflow is three commands:</p>
+<pre><span class="c"># 1. edit the live file as normal, e.g. ~/.config/starship.toml</span>
+chezmoi re-add ~/.config/starship.toml   <span class="c"># 2. copy the change into the repo</span>
+chezmoi git -- commit -am "message"       <span class="c"># 3. commit, then push</span>
+chezmoi git -- push</pre>
+  <p><code>chezmoi diff</code> shows anything the live files have that the repo doesn't. <code>chezmoi cd</code> drops you into the repo directory in a subshell (<code>exit</code> to come back).</p>
+  <h3>On a new machine</h3>
+<pre>brew install chezmoi starship eza bat git-delta fzf btop lazydocker \
+             lazygit ripgrep fd atuin mise gh mosh
+brew install --cask font-hack-nerd-font raycast nikitabobko/tap/aerospace
+brew install FelixKratz/formulae/borders
+chezmoi init --apply https://github.com/kaikino/dotfiles.git</pre>
+  <p>On Linux, swap brew for the distro's packages; the shell config degrades cleanly wherever a tool is missing. The README in the repo carries the same list.</p>
+</section>
+
+<section class="panel" id="files">
+  <h2>File map</h2>
+  <ul class="tree">
+    <li><span>~/.zshrc</span><span>PATH + two source lines. Don't add to it.</span></li>
+    <li><span>~/.config/zsh/theme.zsh</span><span>Prompt init, aliases, fzf/atuin/mise wiring, ssh tint.</span></li>
+    <li><span>~/.config/zsh/local.zsh</span><span>This machine only. Untracked.</span></li>
+    <li><span>~/.config/ghostty/config</span><span>The palette, font, opacity, padding. cmux reads this.</span></li>
+    <li><span>~/.config/cmux/cmux.json</span><span>Pane borders, sidebar, workspace colours.</span></li>
+    <li><span>~/.config/starship.toml</span><span>Prompt layout and modules.</span></li>
+    <li><span>~/.gitconfig</span><span>Identity, delta, colours, zdiff3.</span></li>
+    <li><span>~/.config/bat/config</span><span>Theme and gutter style.</span></li>
+    <li><span>~/.config/ripgrep/config</span><span>rg defaults and colours.</span></li>
+    <li><span>~/.config/atuin/config.toml</span><span>History picker style.</span></li>
+    <li><span>~/.config/mise/config.toml</span><span>Which version files mise honours.</span></li>
+    <li><span>~/.config/btop/btop.conf</span><span>Theme, graph style, boxes.</span></li>
+    <li><span>~/.config/lazygit/config.yml</span><span>Colours, border, delta pager.</span></li>
+    <li><span>~/.config/lazydocker/config.yml</span><span>Colours, border.</span></li>
+    <li><span>~/.config/aerospace/aerospace.toml</span><span>Keymap, gaps, floating apps, border colours.</span></li>
+    <li><span>~/.claude/statusline.sh</span><span>Claude Code status row, same palette.</span></li>
+    <li><span>~/.docker/config.json</span><span>ps/images column formats. Untracked.</span></li>
+    <li><span>~/.local/share/chezmoi/</span><span>The repo. <code>docs/</code> holds this page.</span></li>
+  </ul>
+</section>
+
+<section class="panel" id="todo">
+  <h2>Still to do</h2>
+  <ul class="todo">
+    <li><code>gh auth login</code> — in a plain cmux tab, not through Claude; it needs to prompt.</li>
+    <li>Launch AeroSpace (<code>open -a AeroSpace</code>), grant Accessibility, expect the desktop to re-tile.</li>
+    <li>Raycast: confirm <kbd>⌘Space</kbd> took over from Spotlight; turn on Clipboard History.</li>
+    <li><code>chezmoi git -- push</code> — the repo is a few commits ahead of GitHub.</li>
+    <li>On the PC, when you're back at it: install the tools, <code>apt install mosh</code>, <code>chezmoi init --apply</code>.</li>
+    <li>Optional: <code>atuin register</code> for shared history across both machines.</li>
+    <li class="done">Font and opacity approved.</li>
+    <li class="done">Node repaired (26.8.2), mise in place for per-project pins.</li>
+  </ul>
+</section>
+
+<p class="foot">Edit this page at <span class="path">~/.local/share/chezmoi/docs/environment.html</span>.</p>
+
+</div>
