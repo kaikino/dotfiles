@@ -1,0 +1,11 @@
+# ── Desktop: window manager, launcher, terminal app ───────────────────
+# All free/open-source, but AeroSpace and borders need Accessibility
+# permission, which MDM profiles often block. Check before bundling.
+
+tap "felixkratz/formulae", "https://github.com/FelixKratz/homebrew-formulae"
+tap "manaflow-ai/cmux"
+tap "nikitabobko/tap"
+brew "felixkratz/formulae/borders", trusted: true
+cask "nikitabobko/tap/aerospace", trusted: true
+cask "cmux"
+cask "raycast"

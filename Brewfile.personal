@@ -1,0 +1,45 @@
+# ── Personal: toolchains, licence-sensitive apps, hobbies ─────────────
+# Not for a work machine without checking. Docker Desktop and OrbStack
+# both require a paid licence for commercial use above a company-size
+# threshold. Toolchains are here because a work box has its own stack.
+
+tap "kaikino/kpen"
+
+# Toolchains and their tooling
+brew "go"
+brew "golangci-lint"
+brew "goose"
+brew "gotestsum"
+brew "sqlc"
+brew "node"
+brew "openjdk@17"
+brew "jenv"
+brew "ant"
+npm "pnpm"
+npm "vite"
+
+# Containers / VMs
+cask "docker-desktop"
+cask "orbstack"
+cask "multipass"
+
+# Hardware
+brew "icarus-verilog"
+brew "verilator"
+brew "surfer"
+
+# Media
+brew "ffmpeg"
+brew "imagemagick"
+brew "gifsicle"
+cask "avidemux"
+cask "paintbrush"
+cask "basictex"
+
+# Misc
+brew "sdl2-compat"
+brew "sdl2_ttf"
+brew "telnet"
+brew "wakeonlan"
+cask "kpen"
+cask "vesktop"
