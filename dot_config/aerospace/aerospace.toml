@@ -1,0 +1,117 @@
+# ══════════════════════════════════════════════════════════════════════
+#  AeroSpace — i3-style tiling for macOS. No SIP changes needed.
+#
+#  Everything is on the Option key (alt), which macOS uses for almost
+#  nothing by default. Vim directions: h/j/k/l. Shift = move instead
+#  of focus. Numbers = workspaces.
+#
+#  Reload after editing: alt-shift-;  then  esc
+# ══════════════════════════════════════════════════════════════════════
+
+start-at-login = true
+
+# Oxblood outline on the focused window, navy on the rest. In a tiling
+# layout nothing overlaps, so the border is how you know where you are.
+after-startup-command = [
+  'exec-and-forget borders active_color=0xffb84a4a inactive_color=0xff1e2a45 width=4.0'
+]
+
+# Keep the tree flat and sane instead of nesting containers forever.
+enable-normalization-flatten-containers = true
+enable-normalization-opposite-orientation-for-nested-containers = true
+
+default-root-container-layout = 'tiles'
+default-root-container-orientation = 'auto'
+accordion-padding = 30
+
+# Mouse follows focus across monitors so you don't click into the wrong one.
+on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
+automatically-unhide-macos-hidden-apps = false
+
+[key-mapping]
+preset = 'qwerty'
+
+# Enough of a gap that windows read as separate panes, not a mosaic.
+[gaps]
+inner.horizontal = 8
+inner.vertical   = 8
+outer.left       = 8
+outer.bottom     = 8
+outer.top        = 8
+outer.right      = 8
+
+# ── Main mode ─────────────────────────────────────────────────────────
+[mode.main.binding]
+# Layouts
+alt-slash = 'layout tiles horizontal vertical'
+alt-comma = 'layout accordion horizontal vertical'
+alt-f     = 'fullscreen'
+
+# Focus
+alt-h = 'focus left'
+alt-j = 'focus down'
+alt-k = 'focus up'
+alt-l = 'focus right'
+
+# Move window
+alt-shift-h = 'move left'
+alt-shift-j = 'move down'
+alt-shift-k = 'move up'
+alt-shift-l = 'move right'
+
+# Resize
+alt-minus = 'resize smart -50'
+alt-equal = 'resize smart +50'
+
+# Workspaces
+alt-1 = 'workspace 1'
+alt-2 = 'workspace 2'
+alt-3 = 'workspace 3'
+alt-4 = 'workspace 4'
+alt-5 = 'workspace 5'
+alt-6 = 'workspace 6'
+alt-7 = 'workspace 7'
+alt-8 = 'workspace 8'
+alt-9 = 'workspace 9'
+
+# Send window to workspace (and follow it)
+alt-shift-1 = ['move-node-to-workspace 1', 'workspace 1']
+alt-shift-2 = ['move-node-to-workspace 2', 'workspace 2']
+alt-shift-3 = ['move-node-to-workspace 3', 'workspace 3']
+alt-shift-4 = ['move-node-to-workspace 4', 'workspace 4']
+alt-shift-5 = ['move-node-to-workspace 5', 'workspace 5']
+alt-shift-6 = ['move-node-to-workspace 6', 'workspace 6']
+alt-shift-7 = ['move-node-to-workspace 7', 'workspace 7']
+alt-shift-8 = ['move-node-to-workspace 8', 'workspace 8']
+alt-shift-9 = ['move-node-to-workspace 9', 'workspace 9']
+
+alt-tab       = 'workspace-back-and-forth'
+alt-shift-tab = 'move-workspace-to-monitor --wrap-around next'
+
+# Service mode: rarely-used commands behind a prefix so they can't misfire.
+alt-shift-semicolon = 'mode service'
+
+# ── Service mode ──────────────────────────────────────────────────────
+[mode.service.binding]
+esc       = ['reload-config', 'mode main']
+r         = ['flatten-workspace-tree', 'mode main']   # reset layout
+f         = ['layout floating tiling', 'mode main']   # toggle float
+backspace = ['close-all-windows-but-current', 'mode main']
+
+alt-shift-h = ['join-with left',  'mode main']
+alt-shift-j = ['join-with down',  'mode main']
+alt-shift-k = ['join-with up',    'mode main']
+alt-shift-l = ['join-with right', 'mode main']
+
+# ── Apps that should float, not tile ──────────────────────────────────
+[[on-window-detected]]
+if.app-id = 'com.apple.systempreferences'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.apple.finder'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.apple.ActivityMonitor'
+run = 'layout floating'
