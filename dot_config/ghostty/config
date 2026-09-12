@@ -1,0 +1,76 @@
+# ══════════════════════════════════════════════════════════════════════
+#  Ghostty config — read by cmux for terminal rendering.
+#  App behavior (sidebar, notifications, panes) lives in
+#  ~/.config/cmux/cmux.json. Reload BOTH with: cmux reload-config
+# ══════════════════════════════════════════════════════════════════════
+
+# ── Palette: "Oxblood Navy" ───────────────────────────────────────────
+# TokyoNight Night is loaded first only as a safety net — every color
+# that matters is overridden below. Deep navy ground, muted primaries,
+# oxblood red as the single loud accent (errors, cursor, prompt mark).
+# Every other tool on this machine reads these 16 slots instead of
+# hardcoding hex, so re-theming the whole setup means editing this block.
+theme = TokyoNight Night
+
+background = #0B1020
+foreground = #C6CCDA
+cursor-color = #B84A4A
+cursor-text = #0B1020
+selection-background = #1E2A45
+selection-foreground = #E6EAF2
+
+palette = 0=#131A2B
+palette = 1=#B84A4A
+palette = 2=#7FA97E
+palette = 3=#C7A96B
+palette = 4=#5680C2
+palette = 5=#8F6FA8
+palette = 6=#5C9FA8
+palette = 7=#C6CCDA
+palette = 8=#4A5570
+palette = 9=#E06A6A
+palette = 10=#9BC498
+palette = 11=#E3C888
+palette = 12=#7AA2E8
+palette = 13=#B191CC
+palette = 14=#7FC4CE
+palette = 15=#E6EAF2
+
+# Navy backgrounds swallow dim greys. A hair of enforced contrast keeps
+# dimmed agent output legible without flattening the palette.
+minimum-contrast = 1.05
+
+# ── Type ──────────────────────────────────────────────────────────────
+# Hack: squared-off terminal face, no humanist curves, reads as a TTY.
+# The Nerd Font build carries the glyphs starship and eza want.
+font-family = "Hack Nerd Font Mono"
+font-size = 13
+font-thicken = true
+
+# Leading. The single biggest readability win in a terminal — dense agent
+# output stops looking like a wall.
+adjust-cell-height = 12%
+
+# ── Cursor ────────────────────────────────────────────────────────────
+cursor-style = block
+cursor-style-blink = false
+mouse-hide-while-typing = true
+
+# ── Window chrome ─────────────────────────────────────────────────────
+# Real margins. Text should never touch a window edge.
+window-padding-x = 14
+window-padding-y = 10
+window-padding-balance = true
+window-padding-color = extend
+
+# ── Translucency ──────────────────────────────────────────────────────
+# Enough to read the desktop through, not enough to cost code contrast.
+# Blur keeps busy wallpapers from turning into visual noise behind text.
+background-opacity = 0.90
+background-blur = 20
+
+# ── Behavior ──────────────────────────────────────────────────────────
+# ~100MB, so long agent sessions stay scrollable.
+scrollback-limit = 100000000
+copy-on-select = clipboard
+link-url = true

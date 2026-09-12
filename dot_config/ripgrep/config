@@ -1,0 +1,12 @@
+# rg defaults. Matches in oxblood, paths in blue, line numbers dimmed.
+--smart-case
+--hidden
+--glob=!.git/
+--max-columns=200
+--max-columns-preview
+--colors=path:fg:blue
+--colors=path:style:bold
+--colors=line:fg:8
+--colors=column:fg:8
+--colors=match:fg:red
+--colors=match:style:bold

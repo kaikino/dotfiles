@@ -1,0 +1,25 @@
+# Git TUI. Same treatment as lazydocker: oxblood on the focused panel,
+# dim grey elsewhere. Diffs go through the same delta as the CLI.
+gui:
+  theme:
+    activeBorderColor:
+      - red
+      - bold
+    inactiveBorderColor:
+      - '#4A5570'
+    searchingActiveBorderColor:
+      - yellow
+      - bold
+    selectedLineBgColor:
+      - '#1E2A45'
+    optionsTextColor:
+      - blue
+  border: single
+  nerdFontsVersion: "3"
+  showRandomTip: false
+  showBottomLine: false
+  scrollHeight: 4
+git:
+  diffRenderers:
+    - colorArg: always
+      command: delta --paging=never

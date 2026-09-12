@@ -1,0 +1,20 @@
+# Docker TUI. Border colors are ANSI names, so they track the palette:
+# oxblood marks the focused panel, everything else stays quiet.
+gui:
+  theme:
+    activeBorderColor:
+      - red
+      - bold
+    inactiveBorderColor:
+      - black
+    selectedLineBgColor:
+      - blue
+    optionsTextColor:
+      - blue
+  border: single
+  wrapMainPanel: true
+  sidePanelWidth: 0.3
+  showBottomLine: false
+  containerStatusHealthStyle: long
+logs:
+  since: 60m

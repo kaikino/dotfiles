@@ -1,0 +1,12 @@
+# Shell history. Compact inline picker below the prompt rather than a
+# full-screen takeover; Ctrl-R opens it, Enter runs the selection.
+style = "compact"
+inline_height = 18
+show_help = false
+show_tabs = false
+enter_accept = true
+search_mode = "fuzzy"
+filter_mode = "global"
+keymap_mode = "emacs"
+# Timestamps age into "3m ago" instead of raw dates.
+show_preview = true

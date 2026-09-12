@@ -1,0 +1,82 @@
+{
+  "$schema": "https://raw.githubusercontent.com/manaflow-ai/cmux/main/web/data/cmux.schema.json",
+  "schemaVersion": 1,
+
+  "app": {
+    "appearance": "dark",
+    "appIcon": "dark",
+    "minimalMode": true,
+    "hideTabCloseButton": true,
+    "confirmQuit": "dirty-only",
+    "commandPaletteSearchesAllSurfaces": true,
+    "focusHistoryIncludesPanesAndTabs": true
+  },
+
+  "terminal": {
+    "showScrollBar": false,
+    "adaptiveDefaultTheme": false
+  },
+
+  "sidebarAppearance": {
+    "matchTerminalBackground": true
+  },
+
+  "paneBorderColor": "#1E2A45",
+  "activePaneBorderColor": "#B84A4A",
+
+  "workspaceColors": {
+    "indicatorStyle": "washRail",
+    "selectionColor": "#1E2A45",
+    "notificationBadgeColor": "#B84A4A",
+    "colors": {
+      "Red": "#B84A4A",
+      "Orange": "#C4763C",
+      "Amber": "#C7A96B",
+      "Green": "#7FA97E",
+      "Teal": "#5C9FA8",
+      "Aqua": "#7FC4CE",
+      "Blue": "#5680C2",
+      "Indigo": "#3E5A8C",
+      "Purple": "#8F6FA8",
+      "Magenta": "#A06A96",
+      "Rose": "#B07A8C",
+      "Charcoal": "#4A5570"
+    }
+  },
+
+  "sidebar": {
+    "branchLayout": "inline",
+    "wrapWorkspaceTitles": false,
+    "showWorkspaceDescription": true,
+    "showBranchDirectory": true,
+    "watchGitStatus": true,
+    "showNotificationMessage": true,
+    "notificationMessageLineLimit": 3,
+    "showAgentActivity": true,
+    "showProgress": true,
+    "showPorts": true,
+    "showCustomMetadata": true,
+    "showPullRequests": false,
+    "showLog": false,
+    "showSSH": false,
+    "loadingSpinnerPosition": "leading",
+    "notificationBadgePosition": "trailing",
+    "openPortLinksInCmuxBrowser": true,
+    "openPullRequestLinksInCmuxBrowser": true
+  },
+
+  "notifications": {
+    "dockBadge": true,
+    "showInMenuBar": true,
+    "unreadPaneRing": true,
+    "paneFlash": true,
+    "paneFlashColor": "#B84A4A",
+    "agentPermissionPrompt": true,
+    "agentTurnComplete": "whenIdle",
+    "agentIdleReminder": true
+  },
+
+  "diffViewer": {
+    "defaultLayout": "split"
+  }
+}

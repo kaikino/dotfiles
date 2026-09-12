@@ -1,0 +1,9 @@
+export PATH="$HOME/.jenv/bin:$PATH"
+eval "$(jenv init -)"
+export PATH="$HOME/.local/bin:$PATH"
+
+# Prompt, colors, and tool aliases (edit that file, not this one).
+[[ -f ~/.config/zsh/theme.zsh ]] && source ~/.config/zsh/theme.zsh
+
+# Host-specific aliases and secrets. Stays out of the dotfiles repo.
+[[ -f ~/.config/zsh/local.zsh ]] && source ~/.config/zsh/local.zsh

@@ -1,0 +1,109 @@
+# ══════════════════════════════════════════════════════════════════════
+#  Prompt — squared-off two-line rail, no powerline wedges.
+#  Colors are ANSI *names*, never hex: they resolve through the Ghostty
+#  palette, so re-theming the terminal re-themes the prompt for free.
+# ══════════════════════════════════════════════════════════════════════
+
+add_newline = true
+
+# Rail in oxblood. Everything hangs off the top line; the bottom line
+# is just the arrow, so there's always a clean left edge to type against.
+format = """
+[┌─](red)$directory$git_branch$git_status$docker_context$kubernetes$nodejs$java$python$cmd_duration
+[└─](red)$character"""
+
+# Clock on the right. Long agent runs, and you want to know when.
+right_format = "$time"
+
+[directory]
+style = "bold blue"
+format = "[$path]($style)[$read_only]($read_only_style) "
+truncation_length = 3
+truncate_to_repo = true
+truncation_symbol = "…/"
+read_only = " ro"
+read_only_style = "bright-black"
+
+[git_branch]
+symbol = ""
+style = "yellow"
+format = "[on $branch]($style) "
+
+# Dirty state is the one thing that should catch your eye — hence red.
+[git_status]
+style = "red"
+format = "([$all_status$ahead_behind]($style) )"
+conflicted = "!"
+ahead = "^${count}"
+behind = "v${count}"
+diverged = "^${ahead_count}v${behind_count}"
+untracked = "?${count}"
+modified = "*${count}"
+staged = "+${count}"
+renamed = "r${count}"
+deleted = "x${count}"
+stashed = "="
+
+# Only surfaces in dirs that actually have Docker files, and only when
+# you're off the default context — silent the rest of the time.
+[docker_context]
+symbol = "docker:"
+style = "cyan"
+format = "[$symbol$context]($style) "
+
+# Same idea for k8s: appears when the directory implies cluster work,
+# so you get a "which cluster am I about to hit" check for free.
+[kubernetes]
+disabled = false
+symbol = "k8s:"
+style = "cyan"
+format = "[$symbol$context(/$namespace)]($style) "
+detect_files = ["kustomization.yaml", "Chart.yaml", "skaffold.yaml"]
+detect_folders = ["k8s", "manifests"]
+
+# Version modules key off real project markers only. Detecting on file
+# *extensions* means one stray ~/chat.js puts "node" in your home prompt.
+[nodejs]
+symbol = "node "
+style = "green"
+format = "[$symbol$version]($style) "
+detect_extensions = []
+detect_files = ["package.json", ".node-version", ".nvmrc"]
+detect_folders = ["node_modules"]
+
+# .java-version deliberately excluded: jenv writes one to $HOME for the
+# global default, so it would tag every shell that starts in ~.
+[java]
+symbol = "java "
+style = "green"
+format = "[$symbol$version]($style) "
+detect_extensions = []
+detect_files = ["pom.xml", "build.gradle", "build.gradle.kts", "build.sbt", "deps.edn", "project.clj", ".sdkmanrc"]
+detect_folders = [".mvn", ".gradle"]
+
+[python]
+symbol = "py "
+style = "green"
+format = "[$symbol($virtualenv )$version]($style) "
+detect_extensions = []
+detect_files = ["pyproject.toml", "requirements.txt", "setup.py", "Pipfile", "tox.ini", ".python-version"]
+detect_folders = [".venv", "venv"]
+
+# Anything slower than 2s gets timed. Free feedback on what's dragging.
+[cmd_duration]
+min_time = 2000
+style = "bright-black"
+format = "[took $duration]($style) "
+
+[time]
+disabled = false
+time_format = "%H:%M"
+style = "bright-black"
+format = "[$time]($style)"
+
+# Blue arrow when the last command succeeded, red when it didn't —
+# readable at a glance without reading any text.
+[character]
+success_symbol = "[>](bold blue)"
+error_symbol = "[>](bold bright-red)"
+vimcmd_symbol = "[<](bold yellow)"

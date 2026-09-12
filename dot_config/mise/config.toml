@@ -1,0 +1,8 @@
+# Per-project runtime versions. No global tools are pinned here on
+# purpose: Homebrew's node stays the fallback, and mise only takes over
+# in directories that declare a version.
+#
+# Java is deliberately NOT listed — jenv still owns the JDKs, and having
+# mise also react to .java-version would make two managers fight.
+[settings]
+idiomatic_version_file_enable_tools = ["node", "python"]

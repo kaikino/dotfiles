@@ -1,0 +1,6 @@
+# base16 renders syntax through the terminal's own 16 ANSI slots, so
+# `bat` matches the palette exactly instead of shipping its own greys.
+--theme="base16"
+--style="numbers,changes,header"
+--italic-text=always
+--paging=auto

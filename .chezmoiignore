@@ -1,0 +1,5 @@
+# Machine-local, never synced.
+.config/zsh/local.zsh
+
+# Repo docs, not a dotfile.
+README.md
