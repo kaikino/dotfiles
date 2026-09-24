@@ -4,13 +4,14 @@
 //  No curvature, no chromatic aberration: those cost legibility and
 //  this is a terminal you read all day.
 //
-//  Tune the four constants; Ghostty reloads on `cmux reload-config`.
+//  Tune the five constants; Ghostty reloads on `cmux reload-config`.
 // ══════════════════════════════════════════════════════════════════════
 
-const float SCANLINE_STRENGTH = 0.10;  // 0 = off, 0.25 = obvious
+const float SCANLINE_STRENGTH = 0.05;  // 0 = off, 0.25 = obvious
 const float SCANLINE_PERIOD   = 4.0;   // physical px per line (Retina = 2 logical)
-const float BLOOM_STRENGTH    = 0.12;  // glow bleeding off bright pixels
-const float VIGNETTE_STRENGTH = 0.16;  // edge darkening, 0 = flat
+const float BLOOM_STRENGTH    = 0.14;  // glow bleeding off bright pixels
+const float VIGNETTE_STRENGTH = 0.08;  // edge darkening, 0 = flat
+const float GAIN              = 1.06;  // overall lift; 1.0 = none, offsets the dimming above
 
 void mainImage(out vec4 fragColor, in vec2 fragCoord) {
     vec2 uv  = fragCoord / iResolution.xy;
@@ -36,6 +37,10 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord) {
     vec2 v = uv * (1.0 - uv);
     float vig = pow(clamp(v.x * v.y * 16.0, 0.0, 1.0), VIGNETTE_STRENGTH);
     col *= vig;
+
+    // Gain: scanlines and vignette only ever subtract light, so pay a
+    // little back so the result isn't darker than the raw terminal.
+    col = min(col * GAIN, vec3(1.0));
 
     // Keep the alpha the terminal handed us so window transparency
     // still works — the shader must not paint over the blur.
