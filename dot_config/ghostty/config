@@ -66,7 +66,7 @@ window-padding-color = extend
 # ── Translucency ──────────────────────────────────────────────────────
 # Enough to read the desktop through, not enough to cost code contrast.
 # Blur keeps busy wallpapers from turning into visual noise behind text.
-background-opacity = 0.90
+background-opacity = 0.95
 background-blur = 20
 
 # ── CRT shader ────────────────────────────────────────────────────────
