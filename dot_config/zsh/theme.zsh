@@ -24,8 +24,11 @@ command -v mise >/dev/null && eval "$(mise activate zsh)"
 
 # ── Completion ────────────────────────────────────────────────────────
 # Homebrew's completions aren't on the system zsh's fpath by default.
+# HOMEBREW_PREFIX comes from `brew shellenv` in ~/.zprofile; on Linux it's
+# /home/linuxbrew/.linuxbrew, so nothing below hardcodes /opt/homebrew.
 # compinit is cached to ~/.cache/zsh so it doesn't rescan every launch.
-fpath=(/opt/homebrew/share/zsh/site-functions $fpath)
+_brew_share="${HOMEBREW_PREFIX:-/opt/homebrew}/share"
+fpath=($_brew_share/zsh/site-functions $fpath)
 mkdir -p "$HOME/.cache/zsh"
 autoload -Uz compinit && compinit -d "$HOME/.cache/zsh/zcompdump"
 zstyle ':completion:*' menu no
@@ -157,19 +160,23 @@ _remote-tinted() {
 }
 ssh()  { _remote-tinted ssh  "$@" }
 mosh() { _remote-tinted mosh "$@" }
+# gcloud compute ssh execs ssh itself, so the wrapper above never sees it.
+gcloud() {
+  if [[ $1 == compute && $2 == ssh ]]; then _remote-tinted gcloud "$@"; else command gcloud "$@"; fi
+}
 
 # ══════════════════════════════════════════════════════════════════════
 #  Line editor plugins. Order matters: autosuggestions wraps widgets,
 #  syntax-highlighting must be the last thing sourced in the shell.
 # ══════════════════════════════════════════════════════════════════════
-if [[ -f /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]]; then
-  source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+if [[ -f $_brew_share/zsh-autosuggestions/zsh-autosuggestions.zsh ]]; then
+  source $_brew_share/zsh-autosuggestions/zsh-autosuggestions.zsh
   ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'          # ghost text in slot-8 grey
   ZSH_AUTOSUGGEST_STRATEGY=(history completion)
   bindkey '^ ' autosuggest-accept                 # Ctrl-Space takes the whole suggestion
 fi
-if [[ -f /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]]; then
-  source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+if [[ -f $_brew_share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]]; then
+  source $_brew_share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
   ZSH_HIGHLIGHT_STYLES[unknown-token]='fg=red,bold'
   ZSH_HIGHLIGHT_STYLES[path]='underline'
   ZSH_HIGHLIGHT_STYLES[comment]='fg=8'

@@ -9,3 +9,10 @@ docs
 
 # Package manifest, consumed by brew bundle — not a dotfile.
 Brewfile*
+
+# macOS-only apps: window manager, terminal, its cmux wrapper.
+{{ if ne .chezmoi.os "darwin" }}
+.config/aerospace
+.config/ghostty
+.config/cmux
+{{ end }}

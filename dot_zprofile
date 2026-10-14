@@ -1,0 +1,6 @@
+# Homebrew on PATH, and HOMEBREW_PREFIX for theme.zsh. Login shells only,
+# so it runs once per session rather than in every nested zsh.
+for _brew in /opt/homebrew/bin/brew /home/linuxbrew/.linuxbrew/bin/brew; do
+  [[ -x $_brew ]] && { eval "$($_brew shellenv)"; break; }
+done
+unset _brew

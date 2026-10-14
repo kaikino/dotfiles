@@ -30,8 +30,28 @@ add **dev** if the tools are allowed and **desktop** if IT allows
 Accessibility permissions. Leave atuin sync off there — shell history is
 company data.
 
-On Linux, skip the bundles and install the core tools from the distro's
-packages; the shell config degrades cleanly where one is missing.
+### Linux (Ubuntu VM, e.g. GCE)
+
+```sh
+sh -c "$(curl -fsLS get.chezmoi.io)" -- -b ~/.local/bin init --apply https://github.com/kaikino/dotfiles.git
+exec zsh -l
+```
+
+`run_onchange_after_linux-core.sh` does the rest: apt prerequisites,
+Homebrew on Linux, the core Brewfile (casks filtered out), and `chsh` to
+zsh. Homebrew rather than apt because Ubuntu 24.04's nvim (0.9) and fzf
+(0.44) are too old for this config. Opt-in bundles the same way:
+`grep -v '^cask ' "$(chezmoi source-path)/Brewfile.dev" | brew bundle --file=-`.
+AeroSpace, Ghostty and cmux configs aren't installed off macOS.
+
+- **OS Login** accounts aren't in `/etc/passwd`, so `chsh` fails. Instead,
+  end `~/.bashrc` with `[[ $- == *i* ]] && command -v zsh >/dev/null && exec zsh -l`.
+- **conda**: `conda init` writes into `~/.zshrc`, which chezmoi owns. Put
+  `eval "$(~/miniconda3/bin/conda shell.zsh hook)"` in `local.zsh` instead.
+- **Terminfo**: once per host, from the Mac:
+  `infocmp -x xterm-ghostty | ssh HOST -- tic -x -`. Without it the shell
+  falls back to `xterm-256color`.
+- **SSH tint** covers `gcloud compute ssh` too.
 
 Host-specific aliases (addresses, one-offs) go in `~/.config/zsh/local.zsh`,
 which is sourced if present and deliberately not tracked.
